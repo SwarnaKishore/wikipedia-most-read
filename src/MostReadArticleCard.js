@@ -14,7 +14,7 @@ class MostReadArticleCard extends Component {
     const {article} = this.props;
     const {key} = this.props;
     console.log(article, key);
-  const image = article.thumbnail && <CardMedia className="Card-media" image={article.thumbnail.source} title={article.title}/>;
+    const image = article.thumbnail && <CardMedia className="Card-media" image={article.thumbnail.source} title={article.title}/>;
 
 const card = 
   (

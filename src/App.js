@@ -1,6 +1,8 @@
 import './App.css';
 import React, {Component } from 'react';
 import MostReadArticleCard from './MostReadArticleCard';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 class App extends Component {
   state = {
@@ -23,10 +25,17 @@ class App extends Component {
 
   render() {
     const {mostReadArticles} = this.state;
-    const result = mostReadArticles.map((entry, index) => {
-      return <MostReadArticleCard article={entry} key={index}/>;
-    });
-    return <div>{result}</div>;
+    return (
+      <Container maxWidth="md">
+        <Grid container justify="center" spacing={10}>
+          {mostReadArticles.map((entry, index) => (
+          <Grid key={index} item>
+            <MostReadArticleCard article={entry}/>
+          </Grid>
+        ))}
+        </Grid>
+      </Container>
+    );
   }
 }
 
