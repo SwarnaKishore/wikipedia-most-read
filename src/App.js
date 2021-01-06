@@ -3,6 +3,9 @@ import React, {Component } from 'react';
 import MostReadArticleCard from './MostReadArticleCard';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 class App extends Component {
   state = {
@@ -26,15 +29,25 @@ class App extends Component {
   render() {
     const {mostReadArticles} = this.state;
     return (
-      <Container maxWidth="md">
-        <Grid container justify="center" spacing={10}>
-          {mostReadArticles.map((entry, index) => (
-          <Grid key={index} item>
-            <MostReadArticleCard article={entry}/>
+      <React.Fragment>
+        <AppBar position="relative">
+          <Toolbar>
+            {/* <CameraIcon className={classes.icon} /> */}
+            <Typography variant="h6" color="inherit" noWrap>
+              Wikipedia Most Read
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Container maxWidth="md">
+          <Grid container justify="center" spacing={10}>
+            {mostReadArticles.map((entry, index) => (
+            <Grid key={index} item>
+              <MostReadArticleCard article={entry}/>
+            </Grid>
+          ))}
           </Grid>
-        ))}
-        </Grid>
-      </Container>
+        </Container>
+      </React.Fragment>
     );
   }
 }
