@@ -38,12 +38,32 @@
 }
 
 .Card {
-  max-width: 250px;
+  max-width: 250px !important;
   height: auto;
   min-height: 200px !important;
+  cursor: pointer;
+  font-family: "Open Sans";
 }
 
 .Card-media {
   width: 250px;
   height: 200px;
+}
+/* .Card-title {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Open Sans";
+} */
+
+.App-bar {
+  background-color: #1a76d2 !important;
+}
+.MuiCardHeader-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+}
+
+.contentUrl {
+  text-decoration: none;
 }
