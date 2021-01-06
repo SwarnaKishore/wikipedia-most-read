@@ -30,7 +30,7 @@ class App extends Component {
     const {mostReadArticles} = this.state;
     return (
       <React.Fragment>
-        <AppBar position="relative">
+        <AppBar position="relative" className="App-bar" >
           <Toolbar>
             {/* <CameraIcon className={classes.icon} /> */}
             <Typography variant="h6" color="inherit" noWrap>
