@@ -32,13 +32,12 @@ class App extends Component {
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
           <Toolbar>
-            {/* <CameraIcon className={classes.icon} /> */}
             <Typography variant="h6" color="inherit" noWrap>
               Wikipedia Most Read
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container maxWidth="md">
+        <Container maxWidth="lg">
           <Grid container justify="center" spacing={10}>
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
