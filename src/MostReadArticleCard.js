@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Chip from '@material-ui/core/Chip';
@@ -19,7 +21,7 @@ class MostReadArticleCard extends Component {
 
   return (
     <React.Fragment>
-      <a className="contentUrl" href={contentUrl} target="_blank">
+      <a className="contentUrl" rel="noreferrer" href={contentUrl} target="_blank">
         <Card key={key} className="Card">
           <CardActionArea>
               {image ? image : ''}
