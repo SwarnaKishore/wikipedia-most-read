@@ -10,27 +10,22 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 class MostReadArticleCard extends Component {
   render() {
     const {article} = this.props;
-    const {key} = this.props;
-    console.log(article, key);
-    const handleClick = () => {
-      console.info('You clicked the Chip.');
-    };
     const contentUrl = article.content_urls && article.content_urls.desktop && article.content_urls.desktop.page ? article.content_urls.desktop.page : '';
     const image = article.thumbnail && <CardMedia className="Card-media" image={article.thumbnail.source} title={article.title}/>;
-    const articleViews = <Chip size="small" icon={<VisibilityIcon />} label={article.views + ' views'} onClick={handleClick}/>;
+    const articleViews = <Chip size="small" icon={<VisibilityIcon />} label={article.views + ' views'}/>;
 
   return (
     <React.Fragment>
       <a className="contentUrl" rel="noreferrer" href={contentUrl} target="_blank">
-        <Card key={key} className="Card">
+        <Card className="Card">
           <CardActionArea>
               {image ? image : ''}
               <CardContent>
-              <Typography gutterBottom variant="h5" component="h2"> {article.title}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {article.description}
-              </Typography>
-              <Typography className="Card-views">{articleViews}</Typography>
+                <Typography className="Card-title" gutterBottom variant="h5" component="h2"> {article.title}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {article.description}
+                </Typography>
+                <Typography className="Card-views">{articleViews}</Typography>
               </CardContent>
           </CardActionArea>
         </Card>
