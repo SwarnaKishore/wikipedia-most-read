@@ -10,20 +10,35 @@ import Typography from '@material-ui/core/Typography';
 class App extends Component {
   state = {
     mostReadArticles: [],
-    resultsDate: new Date(),
+    selectedDateForArticles: new Date(),
   }
-  componentDidMount() {
-    const url =
-      'https://en.wikipedia.org/api/rest_v1/feed/featured/2020/12/31'
 
-    fetch(url)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({
-          mostReadArticles: result.mostread.articles,
-          resultsDate: new Date(result.mostread.date)
-        })
+  handleDateChange = (date) => {
+    this.setState({
+      selectedDateForArticles: new Date(date)
+    });
+  };
+  
+  componentDidMount() {
+    this.getMostReadArticles(this.state.selectedDateForArticles);
+  }
+
+  getRequestURL = (date) => {
+    let month = (date.getMonth() + 1).toString().length === 1 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
+    let day = (date.getDate()).toString().length === 1 ? ('0' + date.getDate()) : date.getDate();
+    return 'https://en.wikipedia.org/api/rest_v1/feed/featured/' + date.getFullYear() + '/' + month + '/' + day;
+  }
+
+  getMostReadArticles = (date) => {
+    const url = this.getRequestURL(date);
+  fetch(url)
+    .then((result) => result.json())
+    .then((result) => {
+      this.setState({
+        mostReadArticles: result.mostread.articles,
+        selectedDateForArticles: new Date(result.mostread.date)
       })
+    });
   }
 
   render() {

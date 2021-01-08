@@ -53,20 +53,14 @@
   position: relative;
   top: 6px;
 }
-/* .Card-title {
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Open Sans";
-} */
+.Card-title {
+  word-wrap: break-word !important;
+  font-size: 1.3em !important;
+}
 
 .App-bar {
   background-color: #1a76d2 !important;
 }
-/* .MuiCardHeader-title {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  text-decoration: underline !important;
-} */
 
 .contentUrl {
   text-decoration: none;
