@@ -6,6 +6,9 @@ import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 
 class App extends Component {
   state = {
@@ -15,8 +18,10 @@ class App extends Component {
 
   handleDateChange = (date) => {
     this.setState({
-      selectedDateForArticles: new Date(date)
+      selectedDateForArticles: date
     });
+    console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
+    this.getMostReadArticles(date);
   };
   
   componentDidMount() {
@@ -36,13 +41,36 @@ class App extends Component {
     .then((result) => {
       this.setState({
         mostReadArticles: result.mostread.articles,
-        selectedDateForArticles: new Date(result.mostread.date)
       })
+    console.log(this.state.mostReadArticles, 'articles');
     });
   }
 
   render() {
     const {mostReadArticles} = this.state;
+    const {selectedDateForArticles} = this.state;
+    console.log(selectedDateForArticles, mostReadArticles, 'render');
+    const DatePicker = () => {
+      return (
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container justify="space-around">
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Date picker inline"
+                value={selectedDateForArticles}
+                onChange={this.handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </Grid>
+        </MuiPickersUtilsProvider>
+      )
+    }
     return (
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
@@ -52,7 +80,9 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
+
         <Container maxWidth="lg">
+        <DatePicker />
           <Grid container justify="center" spacing={10}>
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
