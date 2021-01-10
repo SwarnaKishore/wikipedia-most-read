@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import Link from '@material-ui/core/Link';
 
 class App extends Component {
   state = {
@@ -23,7 +24,7 @@ class App extends Component {
     console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
     this.getMostReadArticles(date);
   };
-  
+
   componentDidMount() {
     this.getMostReadArticles(this.state.selectedDateForArticles);
   }
@@ -91,6 +92,17 @@ class App extends Component {
           ))}
           </Grid>
         </Container>
+
+        <footer>
+          <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
+            {'Copyright © '}
+            <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
+              Wikipedia Most Read
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
+        </footer>
       </React.Fragment>
     );
   }
