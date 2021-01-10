@@ -65,3 +65,9 @@
 .contentUrl {
   text-decoration: none;
 }
+
+.FooterStyle {
+  margin-top: 2% !important;
+  padding: 1% !important;
+  margin-bottom: 1% !important;
+}
