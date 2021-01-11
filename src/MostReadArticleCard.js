@@ -16,20 +16,26 @@ class MostReadArticleCard extends Component {
 
   return (
     <React.Fragment>
-      <a className="contentUrl" rel="noreferrer" href={contentUrl} target="_blank">
-        <Card className="Card">
-          <CardActionArea>
-              {image ? image : ''}
-              <CardContent>
-                <Typography className="Card-title" gutterBottom variant="h5" component="h2"> {article.title}</Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {article.description}
-                </Typography>
-                <Typography className="Card-views">{articleViews}</Typography>
-              </CardContent>
-          </CardActionArea>
-        </Card>
-      </a>
+        {(() => {
+            if (image) {
+              return (
+                <a className="contentUrl" rel="noreferrer" href={contentUrl} target="_blank">
+                  <Card className="Card">
+                    <CardActionArea>
+                        {image}
+                        <CardContent>
+                          <Typography className="Card-title" gutterBottom variant="h5" component="h2"> {article.title}</Typography>
+                          <Typography variant="body2" color="textSecondary" component="p">
+                            {article.description}
+                          </Typography>
+                          <Typography className="Card-views">{articleViews}</Typography>
+                        </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </a>
+              )
+            }
+        })()}
     </React.Fragment>
   )
   }
