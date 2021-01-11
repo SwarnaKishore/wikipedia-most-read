@@ -71,3 +71,9 @@
   padding: 1% !important;
   margin-bottom: 1% !important;
 }
+
+.MuiCircularProgress-root {
+  margin-left: 48%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
