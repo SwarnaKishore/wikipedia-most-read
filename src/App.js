@@ -10,6 +10,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Link from '@material-ui/core/Link';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
     this.setState({
       selectedDateForArticles: date
     });
-    console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
+    // console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
     this.getMostReadArticles(date);
   };
 
@@ -43,7 +44,7 @@ class App extends Component {
       this.setState({
         mostReadArticles: result.mostread.articles,
       })
-    console.log(this.state.mostReadArticles, 'articles');
+    // console.log(this.state.mostReadArticles, 'articles');
     });
   }
 
@@ -84,6 +85,7 @@ class App extends Component {
 
         <Container maxWidth="lg">
         <DatePicker />
+          { mostReadArticles && mostReadArticles.length === 0 ?  <CircularProgress /> : '' }
           <Grid container justify="center" spacing={10}>
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
@@ -93,16 +95,22 @@ class App extends Component {
           </Grid>
         </Container>
 
-        <footer>
-          <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
-            {'Copyright © '}
-            <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
-              Wikipedia Most Read
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-          </Typography>
-        </footer>
+        {(() => {
+              if (mostReadArticles.length > 0) {
+                return (
+                  <footer>
+                      <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
+                        {'Copyright © '}
+                        <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
+                          Wikipedia Most Read
+                        </Link>{' '}
+                        {new Date().getFullYear()}
+                        {'.'}
+                      </Typography>
+                  </footer>
+                )
+              }
+        })()}
       </React.Fragment>
     );
   }
