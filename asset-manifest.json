@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/wikipedia-most-read/static/css/main.a3f36032.chunk.css",
-    "main.js": "/wikipedia-most-read/static/js/main.b3fd4677.chunk.js",
-    "main.js.map": "/wikipedia-most-read/static/js/main.b3fd4677.chunk.js.map",
-    "runtime-main.js": "/wikipedia-most-read/static/js/runtime-main.ab64d690.js",
-    "runtime-main.js.map": "/wikipedia-most-read/static/js/runtime-main.ab64d690.js.map",
-    "static/js/2.8b5ca538.chunk.js": "/wikipedia-most-read/static/js/2.8b5ca538.chunk.js",
-    "static/js/2.8b5ca538.chunk.js.map": "/wikipedia-most-read/static/js/2.8b5ca538.chunk.js.map",
-    "static/js/3.13b22911.chunk.js": "/wikipedia-most-read/static/js/3.13b22911.chunk.js",
-    "static/js/3.13b22911.chunk.js.map": "/wikipedia-most-read/static/js/3.13b22911.chunk.js.map",
+    "main.css": "/wikipedia-most-read/static/css/main.188714f3.chunk.css",
+    "main.js": "/wikipedia-most-read/static/js/main.1003c230.chunk.js",
+    "main.js.map": "/wikipedia-most-read/static/js/main.1003c230.chunk.js.map",
+    "runtime-main.js": "/wikipedia-most-read/static/js/runtime-main.232b6b32.js",
+    "runtime-main.js.map": "/wikipedia-most-read/static/js/runtime-main.232b6b32.js.map",
+    "static/js/2.e5d63497.chunk.js": "/wikipedia-most-read/static/js/2.e5d63497.chunk.js",
+    "static/js/2.e5d63497.chunk.js.map": "/wikipedia-most-read/static/js/2.e5d63497.chunk.js.map",
+    "static/js/3.bb2902e4.chunk.js": "/wikipedia-most-read/static/js/3.bb2902e4.chunk.js",
+    "static/js/3.bb2902e4.chunk.js.map": "/wikipedia-most-read/static/js/3.bb2902e4.chunk.js.map",
     "index.html": "/wikipedia-most-read/index.html",
-    "static/css/main.a3f36032.chunk.css.map": "/wikipedia-most-read/static/css/main.a3f36032.chunk.css.map",
-    "static/js/2.8b5ca538.chunk.js.LICENSE.txt": "/wikipedia-most-read/static/js/2.8b5ca538.chunk.js.LICENSE.txt"
+    "static/css/main.188714f3.chunk.css.map": "/wikipedia-most-read/static/css/main.188714f3.chunk.css.map",
+    "static/js/2.e5d63497.chunk.js.LICENSE.txt": "/wikipedia-most-read/static/js/2.e5d63497.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ab64d690.js",
-    "static/js/2.8b5ca538.chunk.js",
-    "static/css/main.a3f36032.chunk.css",
-    "static/js/main.b3fd4677.chunk.js"
+    "static/js/runtime-main.232b6b32.js",
+    "static/js/2.e5d63497.chunk.js",
+    "static/css/main.188714f3.chunk.css",
+    "static/js/main.1003c230.chunk.js"
   ]
 }
