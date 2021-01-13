@@ -11,6 +11,7 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { FcWikipedia } from 'react-icons/fc';
 
 class App extends Component {
   state = {
@@ -77,26 +78,26 @@ class App extends Component {
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
           <Toolbar>
+          <FcWikipedia className="Wiki-icon"/>
             <Typography variant="h6" color="inherit" noWrap>
-              Wikipedia Most Read
+             Wikipedia Most Read
             </Typography>
           </Toolbar>
         </AppBar>
 
         <Container maxWidth="lg">
           <Container maxWidth="sm">
-              <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom>
+              <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom className="App-header"> 
                   Wikipedia Most Read
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Something short and leading about the collection below—its contents, the creator, etc.
-                  Make
+                  Check out Most Read Wikipedia articles for a selected date below.
               </Typography>
               <DatePicker />
           </Container>
 
           { mostReadArticles && mostReadArticles.length === 0 ?  <CircularProgress /> : '' }
-          <Grid container justify="center" spacing={10}>
+          <Grid container justify="center" spacing={10} className="Articles-container">
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
               <MostReadArticleCard article={entry}/>
