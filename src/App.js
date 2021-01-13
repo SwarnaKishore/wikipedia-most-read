@@ -85,18 +85,17 @@ class App extends Component {
 
         <Container maxWidth="lg">
           <Container maxWidth="sm">
-              <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom>
+              <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom className="App-header"> 
                   Wikipedia Most Read
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Something short and leading about the collection below—its contents, the creator, etc.
-                  Make
+                  Check out Most Read Wikipedia articles for a selected date below.
               </Typography>
               <DatePicker />
           </Container>
 
           { mostReadArticles && mostReadArticles.length === 0 ?  <CircularProgress /> : '' }
-          <Grid container justify="center" spacing={10}>
+          <Grid container justify="center" spacing={10} className="Articles-container">
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
               <MostReadArticleCard article={entry}/>
