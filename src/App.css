@@ -79,3 +79,9 @@
 .MuiTypography-h6 {
     font-family: inherit !important;
 }
+
+.Wiki-icon {
+  position: relative;
+  right: 2px;
+  font-size: 35px;
+}

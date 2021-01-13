@@ -11,6 +11,7 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { FcWikipedia } from 'react-icons/fc';
 
 class App extends Component {
   state = {
@@ -77,8 +78,9 @@ class App extends Component {
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
           <Toolbar>
+          <FcWikipedia className="Wiki-icon"/>
             <Typography variant="h6" color="inherit" noWrap>
-              Wikipedia Most Read
+             Wikipedia Most Read
             </Typography>
           </Toolbar>
         </AppBar>
