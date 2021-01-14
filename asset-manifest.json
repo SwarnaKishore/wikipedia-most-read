@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/wikipedia-most-read/static/css/main.188714f3.chunk.css",
-    "main.js": "/wikipedia-most-read/static/js/main.1003c230.chunk.js",
-    "main.js.map": "/wikipedia-most-read/static/js/main.1003c230.chunk.js.map",
+    "main.js": "/wikipedia-most-read/static/js/main.bb686e4f.chunk.js",
+    "main.js.map": "/wikipedia-most-read/static/js/main.bb686e4f.chunk.js.map",
     "runtime-main.js": "/wikipedia-most-read/static/js/runtime-main.232b6b32.js",
     "runtime-main.js.map": "/wikipedia-most-read/static/js/runtime-main.232b6b32.js.map",
     "static/js/2.e5d63497.chunk.js": "/wikipedia-most-read/static/js/2.e5d63497.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.232b6b32.js",
     "static/js/2.e5d63497.chunk.js",
     "static/css/main.188714f3.chunk.css",
-    "static/js/main.1003c230.chunk.js"
+    "static/js/main.bb686e4f.chunk.js"
   ]
 }
