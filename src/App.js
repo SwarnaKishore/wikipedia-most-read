@@ -14,14 +14,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { FcWikipedia } from 'react-icons/fc';
 
 class App extends Component {
-  state = {
-    mostReadArticles: [],
-    selectedDateForArticles: new Date(),
-  }
+    state = {
+      mostReadArticles: [],
+      selectedDateForArticles: new Date(new Date().setDate(new Date().getDate() - 1))
+    }
 
   handleDateChange = (date) => {
     this.setState({
-      selectedDateForArticles: date
+      selectedDateForArticles: new Date(date)
     });
     // console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
     this.getMostReadArticles(date);
@@ -32,13 +32,15 @@ class App extends Component {
   }
 
   getRequestURL = (date) => {
+    date = new Date(date);
+    date.setDate(date.getDate() + 1);
     let month = (date.getMonth() + 1).toString().length === 1 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
     let day = (date.getDate()).toString().length === 1 ? ('0' + date.getDate()) : date.getDate();
     return 'https://en.wikipedia.org/api/rest_v1/feed/featured/' + date.getFullYear() + '/' + month + '/' + day;
   }
 
   getMostReadArticles = (date) => {
-    const url = this.getRequestURL(date);
+  const url = this.getRequestURL(date);
   fetch(url)
     .then((result) => result.json())
     .then((result) => {
@@ -63,7 +65,7 @@ class App extends Component {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Date picker inline"
+                label="Pick Date"
                 value={selectedDateForArticles}
                 onChange={this.handleDateChange}
                 KeyboardButtonProps={{
