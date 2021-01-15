@@ -16,7 +16,10 @@ import { FcWikipedia } from 'react-icons/fc';
 class App extends Component {
     state = {
       mostReadArticles: [],
-      selectedDateForArticles: new Date(new Date().setDate(new Date().getDate() - 1))
+      selectedDateForArticles: new Date(new Date().setDate(new Date().getDate() - 1)),
+      loading: true,
+      noResultsReturned: '',
+      alertMessage: ''
     }
 
   handleDateChange = (date) => {
@@ -40,20 +43,27 @@ class App extends Component {
   }
 
   getMostReadArticles = (date) => {
-  const url = this.getRequestURL(date);
-  fetch(url)
-    .then((result) => result.json())
-    .then((result) => {
-      this.setState({
-        mostReadArticles: result.mostread.articles,
-      })
-    // console.log(this.state.mostReadArticles, 'articles');
-    });
+    this.setState({ loading: true });
+    const url = this.getRequestURL(date);
+    fetch(url)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({
+          mostReadArticles: result && result.mostread && result.mostread.articles ? result.mostread.articles : [],
+          loading: false,
+          noResultsReturned: result && result.mostread && result.mostread.articles ? '' : 'No results returned.',
+          alertMessage: result && result.mostread && result.mostread.articles ? '' : 'Please make sure to select the previous dates excluding current and future dates for retrieving most read articles.'
+        })
+      // console.log(this.state.mostReadArticles, 'articles');
+      });
   }
 
   render() {
     const {mostReadArticles} = this.state;
     const {selectedDateForArticles} = this.state;
+    const {loading} = this.state;
+    const {noResultsReturned} = this.state;
+    const {alertMessage} = this.state;
     console.log(selectedDateForArticles, mostReadArticles, 'render');
     const DatePicker = () => {
       return (
@@ -93,18 +103,22 @@ class App extends Component {
                   Wikipedia Most Read
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Check out Most Read Wikipedia articles for a selected date below.
-              </Typography>
+                  Check out the most read wikipedia articles for a selected date below.   <span>By default displaying most read articles for yesterday.</span>
+                </Typography>
               <DatePicker />
           </Container>
 
-          { mostReadArticles && mostReadArticles.length === 0 ?  <CircularProgress /> : '' }
+          { mostReadArticles && mostReadArticles.length === 0 && loading === true ?  <CircularProgress /> : '' }
           <Grid container justify="center" spacing={10} className="Articles-container">
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
               <MostReadArticleCard article={entry}/>
             </Grid>
           ))}
+            
+         {/* { noResultsReturned && noResultsReturned.length > 0 && loading === false ?  noResultsReturned : '' }
+         { alertMessage && alertMessage.length > 0 && loading === false ? alertMessage : '' } */}
+  
           </Grid>
         </Container>
 
