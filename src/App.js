@@ -12,6 +12,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { FcWikipedia } from 'react-icons/fc';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 class App extends Component {
     state = {
@@ -51,7 +52,7 @@ class App extends Component {
         this.setState({
           mostReadArticles: result && result.mostread && result.mostread.articles ? result.mostread.articles : [],
           loading: false,
-          noResultsReturned: result && result.mostread && result.mostread.articles ? '' : 'No results returned.',
+          noResultsReturned: result && result.mostread && result.mostread.articles ? '' : 'No results returned',
           alertMessage: result && result.mostread && result.mostread.articles ? '' : 'Please make sure to select the previous dates excluding current and future dates for retrieving most read articles.'
         })
       // console.log(this.state.mostReadArticles, 'articles');
@@ -75,7 +76,7 @@ class App extends Component {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Pick Date"
+                label="Select Date"
                 value={selectedDateForArticles}
                 onChange={this.handleDateChange}
                 KeyboardButtonProps={{
@@ -103,22 +104,27 @@ class App extends Component {
                   Wikipedia Most Read
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Check out the most read wikipedia articles for a selected date below.   <span>By default displaying most read articles for yesterday.</span>
+                  Check out the most read wikipedia articles for a selected date below.   <span>By default displaying the most read articles for yesterday.</span>
                 </Typography>
               <DatePicker />
           </Container>
 
           { mostReadArticles && mostReadArticles.length === 0 && loading === true ?  <CircularProgress /> : '' }
+
           <Grid container justify="center" spacing={10} className="Articles-container">
+
+            { noResultsReturned && noResultsReturned.length > 0 && loading === false ?  
+              <Alert severity="warning">
+                <AlertTitle>{noResultsReturned}</AlertTitle>
+                {alertMessage}
+              </Alert>
+            : '' }
+
             {mostReadArticles.map((entry, index) => (
             <Grid key={index} item>
               <MostReadArticleCard article={entry}/>
             </Grid>
           ))}
-            
-         {/* { noResultsReturned && noResultsReturned.length > 0 && loading === false ?  noResultsReturned : '' }
-         { alertMessage && alertMessage.length > 0 && loading === false ? alertMessage : '' } */}
-  
           </Grid>
         </Container>
 
