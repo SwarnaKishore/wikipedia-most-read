@@ -104,7 +104,8 @@ class App extends Component {
                   Wikipedia Most Read
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Check out the most read wikipedia articles for a selected date below.   <span>By default displaying the most read articles for yesterday.</span>
+                  Most read wikipedia articles for a date.  
+                   {/* <span>By default displaying the most read articles for yesterday.</span> */}
                 </Typography>
               <DatePicker />
           </Container>
@@ -129,7 +130,7 @@ class App extends Component {
         </Container>
 
         {(() => {
-              if (mostReadArticles.length > 0) {
+              if (mostReadArticles.length > 0 || noResultsReturned && noResultsReturned.length > 0) {
                 return (
                   <footer>
                       <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
