@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Component } from 'react';
-import MostReadArticleCard from './MostReadArticleCard';
+import MostReadArticleCard from './components/MostReadArticleCard';
 import SingleDatePicker from './components/SingleDatePicker';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -63,28 +63,7 @@ class App extends Component {
     const {loading} = this.state;
     const {noResultsReturned} = this.state;
     const {alertMessage} = this.state;
-    console.log(selectedDateForArticles, mostReadArticles, 'render');
-    // const DatePicker = () => {
-    //   return (
-    //     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    //         <Grid container justify="space-around">
-    //           <KeyboardDatePicker
-    //             disableToolbar
-    //             variant="inline"
-    //             format="MM/dd/yyyy"
-    //             margin="normal"
-    //             id="date-picker-inline"
-    //             label="Select Date"
-    //             value={selectedDateForArticles}
-    //             onChange={this.handleDateChange}
-    //             KeyboardButtonProps={{
-    //               'aria-label': 'change date',
-    //             }}
-    //           />
-    //         </Grid>
-    //     </MuiPickersUtilsProvider>
-    //   )
-    // }
+ 
     return (
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
