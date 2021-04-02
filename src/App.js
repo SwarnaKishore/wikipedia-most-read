@@ -1,14 +1,12 @@
 import './App.css';
 import React, {Component } from 'react';
 import MostReadArticleCard from './MostReadArticleCard';
+import SingleDatePicker from './components/SingleDatePicker';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
 import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { FcWikipedia } from 'react-icons/fc';
@@ -66,27 +64,27 @@ class App extends Component {
     const {noResultsReturned} = this.state;
     const {alertMessage} = this.state;
     console.log(selectedDateForArticles, mostReadArticles, 'render');
-    const DatePicker = () => {
-      return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Select Date"
-                value={selectedDateForArticles}
-                onChange={this.handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </Grid>
-        </MuiPickersUtilsProvider>
-      )
-    }
+    // const DatePicker = () => {
+    //   return (
+    //     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    //         <Grid container justify="space-around">
+    //           <KeyboardDatePicker
+    //             disableToolbar
+    //             variant="inline"
+    //             format="MM/dd/yyyy"
+    //             margin="normal"
+    //             id="date-picker-inline"
+    //             label="Select Date"
+    //             value={selectedDateForArticles}
+    //             onChange={this.handleDateChange}
+    //             KeyboardButtonProps={{
+    //               'aria-label': 'change date',
+    //             }}
+    //           />
+    //         </Grid>
+    //     </MuiPickersUtilsProvider>
+    //   )
+    // }
     return (
       <React.Fragment>
         <AppBar position="relative" className="App-bar" >
@@ -107,7 +105,9 @@ class App extends Component {
                   Most read wikipedia articles for a date.  
                    {/* <span>By default displaying the most read articles for yesterday.</span> */}
                 </Typography>
-              <DatePicker />
+              <SingleDatePicker value={selectedDateForArticles}
+                                change={this.handleDateChange}
+              />
           </Container>
 
           { mostReadArticles && mostReadArticles.length === 0 && loading === true ?  <CircularProgress /> : '' }
