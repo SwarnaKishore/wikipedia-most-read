@@ -2,12 +2,12 @@ import './App.css';
 import React, {Component } from 'react';
 import MostReadArticleCard from './components/MostReadArticleCard';
 import SingleDatePicker from './components/SingleDatePicker';
+import Footer from './components/Footer';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { FcWikipedia } from 'react-icons/fc';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -111,16 +111,7 @@ class App extends Component {
         {(() => {
               if (mostReadArticles.length > 0 || noResultsReturned && noResultsReturned.length > 0) {
                 return (
-                  <footer>
-                      <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
-                        {'Copyright © '}
-                        <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
-                          Wikipedia Most Read
-                        </Link>{' '}
-                        {new Date().getFullYear()}
-                        {'.'}
-                      </Typography>
-                  </footer>
+                 <Footer />
                 )
               }
         })()}
