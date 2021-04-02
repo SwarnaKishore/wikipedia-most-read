@@ -3,13 +3,11 @@ import React, {Component } from 'react';
 import MostReadArticleCard from './components/MostReadArticleCard';
 import SingleDatePicker from './components/SingleDatePicker';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { FcWikipedia } from 'react-icons/fc';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 class App extends Component {
@@ -66,14 +64,7 @@ class App extends Component {
  
     return (
       <React.Fragment>
-        <AppBar position="relative" className="App-bar" >
-          <Toolbar>
-          <FcWikipedia className="Wiki-icon"/>
-            <Typography variant="h6" color="inherit" noWrap>
-             Wikipedia Most Read
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <Navbar />
 
         <Container maxWidth="lg">
           <Container maxWidth="sm">
