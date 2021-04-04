@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/wikipedia-most-read/static/css/main.188714f3.chunk.css",
-    "main.js": "/wikipedia-most-read/static/js/main.82362b4c.chunk.js",
-    "main.js.map": "/wikipedia-most-read/static/js/main.82362b4c.chunk.js.map",
+    "main.js": "/wikipedia-most-read/static/js/main.80392b1d.chunk.js",
+    "main.js.map": "/wikipedia-most-read/static/js/main.80392b1d.chunk.js.map",
     "runtime-main.js": "/wikipedia-most-read/static/js/runtime-main.3d227e15.js",
     "runtime-main.js.map": "/wikipedia-most-read/static/js/runtime-main.3d227e15.js.map",
-    "static/js/2.80e6112e.chunk.js": "/wikipedia-most-read/static/js/2.80e6112e.chunk.js",
-    "static/js/2.80e6112e.chunk.js.map": "/wikipedia-most-read/static/js/2.80e6112e.chunk.js.map",
+    "static/js/2.6fdabe7e.chunk.js": "/wikipedia-most-read/static/js/2.6fdabe7e.chunk.js",
+    "static/js/2.6fdabe7e.chunk.js.map": "/wikipedia-most-read/static/js/2.6fdabe7e.chunk.js.map",
     "static/js/3.e602d13a.chunk.js": "/wikipedia-most-read/static/js/3.e602d13a.chunk.js",
     "static/js/3.e602d13a.chunk.js.map": "/wikipedia-most-read/static/js/3.e602d13a.chunk.js.map",
     "index.html": "/wikipedia-most-read/index.html",
     "static/css/main.188714f3.chunk.css.map": "/wikipedia-most-read/static/css/main.188714f3.chunk.css.map",
-    "static/js/2.80e6112e.chunk.js.LICENSE.txt": "/wikipedia-most-read/static/js/2.80e6112e.chunk.js.LICENSE.txt"
+    "static/js/2.6fdabe7e.chunk.js.LICENSE.txt": "/wikipedia-most-read/static/js/2.6fdabe7e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3d227e15.js",
-    "static/js/2.80e6112e.chunk.js",
+    "static/js/2.6fdabe7e.chunk.js",
     "static/css/main.188714f3.chunk.css",
-    "static/js/main.82362b4c.chunk.js"
+    "static/js/main.80392b1d.chunk.js"
   ]
 }
