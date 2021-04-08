@@ -1,17 +1,13 @@
 import './App.css';
 import React, {Component } from 'react';
-import MostReadArticleCard from './MostReadArticleCard';
+import MostReadArticleCard from './components/MostReadArticleCard';
+import SingleDatePicker from './components/SingleDatePicker';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { FcWikipedia } from 'react-icons/fc';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 class App extends Component {
@@ -65,38 +61,10 @@ class App extends Component {
     const {loading} = this.state;
     const {noResultsReturned} = this.state;
     const {alertMessage} = this.state;
-    console.log(selectedDateForArticles, mostReadArticles, 'render');
-    const DatePicker = () => {
-      return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Select Date"
-                value={selectedDateForArticles}
-                onChange={this.handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </Grid>
-        </MuiPickersUtilsProvider>
-      )
-    }
+ 
     return (
       <React.Fragment>
-        <AppBar position="relative" className="App-bar" >
-          <Toolbar>
-          <FcWikipedia className="Wiki-icon"/>
-            <Typography variant="h6" color="inherit" noWrap>
-             Wikipedia Most Read
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <Navbar />
 
         <Container maxWidth="lg">
           <Container maxWidth="sm">
@@ -107,7 +75,9 @@ class App extends Component {
                   Most read wikipedia articles for a date.  
                    {/* <span>By default displaying the most read articles for yesterday.</span> */}
                 </Typography>
-              <DatePicker />
+              <SingleDatePicker value={selectedDateForArticles}
+                                change={this.handleDateChange}
+              />
           </Container>
 
           { mostReadArticles && mostReadArticles.length === 0 && loading === true ?  <CircularProgress /> : '' }
@@ -132,16 +102,7 @@ class App extends Component {
         {(() => {
               if (mostReadArticles.length > 0 || noResultsReturned && noResultsReturned.length > 0) {
                 return (
-                  <footer>
-                      <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
-                        {'Copyright © '}
-                        <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
-                          Wikipedia Most Read
-                        </Link>{' '}
-                        {new Date().getFullYear()}
-                        {'.'}
-                      </Typography>
-                  </footer>
+                 <Footer />
                 )
               }
         })()}
