@@ -1,13 +1,47 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #F7F3E8;
+  --paper-2: #F1EBDA;
+  --ink: #1F2421;
+  --ink-soft: #55584f;
+  --card: #FFFDF7;
+  --brass: #A9822C;
+  --lamp: #2F6F5E;
+  --lamp-glow: rgba(47, 111, 94, 0.18);
+  --stamp: #A63A3A;
+  --border: #DDD6C4;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dark {
+  --paper: #14181A;
+  --paper-2: #191F1D;
+  --ink: #E8E4D8;
+  --ink-soft: #9a9d93;
+  --card: #1D2422;
+  --brass: #D4AF6A;
+  --lamp: #5FBE9D;
+  --lamp-glow: rgba(95, 190, 157, 0.22);
+  --stamp: #D9645F;
+  --border: #2A322E;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Source Sans 3', sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+@layer utilities {
+  .glow-lamp {
+    box-shadow: 0 0 0 4px var(--lamp-glow);
+  }
 }

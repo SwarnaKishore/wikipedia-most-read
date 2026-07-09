@@ -1,21 +1,24 @@
-
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 
-const footer = () => {
-    return (
-        <footer>
-        <Typography variant="body2" color="textSecondary" align="center" className="FooterStyle">
-          {'Copyright © '}
-          <Link color="inherit" href="https://swarnakishore.github.io/wikipedia-most-read/">
-            Wikipedia Most Read
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-        </Typography>
+const Footer = () => {
+  return (
+    <footer
+      className="mt-12 flex flex-wrap items-center justify-between gap-2 border-t pt-5 font-mono text-[11px]"
+      style={{ borderColor: 'var(--border)', color: 'var(--ink-soft)' }}
+    >
+      <span>
+        Data from the Wikimedia REST API &middot; not affiliated with Wikimedia &middot; &copy; {new Date().getFullYear()}
+      </span>
+      <a
+        href="https://github.com/SwarnaKishore/wikipedia-most-read"
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: 'var(--lamp)' }}
+      >
+        View source on GitHub
+      </a>
     </footer>
-    );
-}
+  );
+};
 
-export default footer;
+export default Footer;

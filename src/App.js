@@ -1,114 +1,109 @@
-import './App.css';
-import React, {Component } from 'react';
-import MostReadArticleCard from './components/MostReadArticleCard';
-import SingleDatePicker from './components/SingleDatePicker';
+import React, { useState, useEffect, useCallback } from 'react';
+import Masthead from './components/Masthead';
+import DateStamp from './components/DateStamp';
+import ArticleCard from './components/ArticleCard';
+import ArticleCardSkeleton from './components/ArticleCardSkeleton';
+import EmptyStateComponent from './components/EmptyState';
 import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Alert, AlertTitle } from '@material-ui/lab';
 
-class App extends Component {
-    state = {
-      mostReadArticles: [],
-      selectedDateForArticles: new Date(new Date().setDate(new Date().getDate() - 1)),
-      loading: true,
-      noResultsReturned: '',
-      alertMessage: ''
+const yesterday = () => {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d;
+};
+
+const getRequestURL = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `https://en.wikipedia.org/api/rest_v1/feed/featured/${year}/${month}/${day}`;
+};
+
+const formatReadable = (date) =>
+  date.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem('wmr-dark-mode');
+      if (saved !== null) return saved === 'true';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch {
+      return false;
     }
+  });
 
-  handleDateChange = (date) => {
-    this.setState({
-      selectedDateForArticles: new Date(date)
-    });
-    // console.log('handleDateChange', this.state.selectedDateForArticles, date, 'date');
-    this.getMostReadArticles(date);
-  };
+  const [selectedDate, setSelectedDate] = useState(yesterday());
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  componentDidMount() {
-    this.getMostReadArticles(this.state.selectedDateForArticles);
-  }
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    try {
+      window.localStorage.setItem('wmr-dark-mode', String(darkMode));
+    } catch {
+      // ignore storage errors (e.g. private browsing)
+    }
+  }, [darkMode]);
 
-  getRequestURL = (date) => {
-    date = new Date(date);
-    date.setDate(date.getDate() + 1);
-    let month = (date.getMonth() + 1).toString().length === 1 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
-    let day = (date.getDate()).toString().length === 1 ? ('0' + date.getDate()) : date.getDate();
-    return 'https://en.wikipedia.org/api/rest_v1/feed/featured/' + date.getFullYear() + '/' + month + '/' + day;
-  }
+  const loadArticles = useCallback(async (date) => {
+    setLoading(true);
+    setErrorMessage('');
+    try {
+      const response = await fetch(getRequestURL(date));
+      const data = await response.json();
+      const results = data?.mostread?.articles || [];
+      setArticles(results);
+      if (results.length === 0) {
+        setErrorMessage('Try a date before today — the archive needs a day to catch up.');
+      }
+    } catch (err) {
+      setArticles([]);
+      setErrorMessage('Could not reach the Wikimedia archive. Check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  getMostReadArticles = (date) => {
-    this.setState({ loading: true });
-    const url = this.getRequestURL(date);
-    fetch(url)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({
-          mostReadArticles: result && result.mostread && result.mostread.articles ? result.mostread.articles : [],
-          loading: false,
-          noResultsReturned: result && result.mostread && result.mostread.articles ? '' : 'No results returned',
-          alertMessage: result && result.mostread && result.mostread.articles ? '' : 'Please make sure to select the previous dates excluding current and future dates for retrieving most read articles.'
-        })
-      // console.log(this.state.mostReadArticles, 'articles');
-      });
-  }
+  useEffect(() => {
+    loadArticles(selectedDate);
+  }, [selectedDate, loadArticles]);
 
-  render() {
-    const {mostReadArticles} = this.state;
-    const {selectedDateForArticles} = this.state;
-    const {loading} = this.state;
-    const {noResultsReturned} = this.state;
-    const {alertMessage} = this.state;
- 
-    return (
-      <React.Fragment>
-        <Navbar />
+  const handleDateChange = (date) => setSelectedDate(date);
 
-        <Container maxWidth="lg">
-          <Container maxWidth="sm">
-              <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom className="App-header"> 
-                  Wikipedia Most Read
-                </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  Most read wikipedia articles for a date.  
-                   {/* <span>By default displaying the most read articles for yesterday.</span> */}
-                </Typography>
-              <SingleDatePicker value={selectedDateForArticles}
-                                change={this.handleDateChange}
-              />
-          </Container>
+  return (
+    <div className="mx-auto min-h-screen max-w-5xl px-6 pb-16">
+      <Masthead darkMode={darkMode} onToggle={() => setDarkMode((v) => !v)} />
 
-          { mostReadArticles && mostReadArticles.length === 0 && loading === true ?  <CircularProgress /> : '' }
+      <DateStamp value={selectedDate} onChange={handleDateChange} />
 
-          <Grid container justify="center" spacing={10} className="Articles-container">
+      <p className="mb-7 mt-1 font-mono text-xs" style={{ color: 'var(--ink-soft)' }}>
+        {loading
+          ? `Loading most read articles for ${formatReadable(selectedDate)}…`
+          : errorMessage
+          ? errorMessage
+          : `Showing top ${articles.length} articles for ${formatReadable(selectedDate)}.`}
+      </p>
 
-            { noResultsReturned && noResultsReturned.length > 0 && loading === false ?  
-              <Alert severity="warning">
-                <AlertTitle>{noResultsReturned}</AlertTitle>
-                {alertMessage}
-              </Alert>
-            : '' }
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-6">
+        {loading &&
+          Array.from({ length: 8 }).map((_, i) => <ArticleCardSkeleton key={i} rank={i + 1} />)}
 
-            {mostReadArticles.map((entry, index) => (
-            <Grid key={index} item>
-              <MostReadArticleCard article={entry}/>
-            </Grid>
+        {!loading && articles.length === 0 && (
+          <EmptyStateComponent message={errorMessage || 'No results returned for that date.'} />
+        )}
+
+        {!loading &&
+          articles.map((article, index) => (
+            <ArticleCard key={article.title || index} article={article} rank={index + 1} />
           ))}
-          </Grid>
-        </Container>
+      </div>
 
-        {(() => {
-              if (mostReadArticles.length > 0 || noResultsReturned && noResultsReturned.length > 0) {
-                return (
-                 <Footer />
-                )
-              }
-        })()}
-      </React.Fragment>
-    );
-  }
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
